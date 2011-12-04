@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aleksander Kwiatkowski"]
   s.date = "2011-12-04"
-  s.description = "Simple gem used for merging range-like objects"
+  s.description = "TODO: longer description of your gem"
   s.email = "bobikx@poczta.fm"
   s.extra_rdoc_files = [
     "LICENSE.txt",
