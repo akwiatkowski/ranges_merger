@@ -46,10 +46,10 @@ class RangesMerger
     i = 1
     while i < sorted.size do
       to_merge = [sorted[i-1], sorted[i]]
-      puts "merging #{to_merge.inspect}"
+      # puts "merging #{to_merge.inspect}"
 
       result = self.two_way_merge(to_merge)
-      puts "merged #{result.inspect}"
+      # puts "merged #{result.inspect}"
 
       sorted[i-1] = result[0]
 

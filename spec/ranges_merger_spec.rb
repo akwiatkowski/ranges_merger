@@ -53,15 +53,40 @@ describe "RangesMerger" do
   end
 
   it "should merge 3 ranges (simple)" do
-    ranges = [[1,2],[2,3],[3,4]]
+    ranges = [[1, 2], [2, 3], [3, 4]]
     result = RangesMerger.merge(ranges)
     result.should == [[1, 4]]
   end
 
-  it "should merge 3 ranges" do
-    ranges = [[0,3], [3,4],[1,2], [10,14], [12,13]]
+  it "should merge multiple (1)" do
+    ranges = [[0, 3], [3, 4], [1, 2], [10, 14], [12, 13]]
     result = RangesMerger.merge(ranges)
-    result.should == [[0, 4],[10,14]]
+    result.should == [[0, 4], [10, 14]]
+  end
+
+  it "should merge multiple (2)" do
+    ranges = [
+      [2, 4],
+      [3, 5],
+      [6, 9],
+      [7, 8],
+      [8, 9]
+    ]
+    result = RangesMerger.merge(ranges)
+    result.should == [[2, 5], [6, 9]]
+  end
+
+
+  it "should merge multiple (2)" do
+    ranges = [
+      [2, 10],
+      [3, 9],
+      [4, 8],
+      [5, 7],
+      [6, 6]
+    ]
+    result = RangesMerger.merge(ranges)
+    result.should == [[2, 10]]
   end
 
 
