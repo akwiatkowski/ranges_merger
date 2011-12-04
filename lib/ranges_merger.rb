@@ -2,12 +2,16 @@ class RangesMerger
   # Merge loop
   def self.merge(_array)
     return _array if _array.size <= 1
-    sorted = _array.sort { |a, b| a[0] <=> b[0] }
+    sorted = _array.sort { |a, b| a[0] <=> b[0] }.uniq
+
+    puts sorted.inspect
 
     result_array = Array.new
 
+    last_result = sorted[0]
     (1...sorted.size).each do |i|
-      result = self.two_way_merge([sorted[i-1], sorted[i]])
+      result = self.two_way_merge([last_result, sorted[i]])
+      last_result = result[0]
       result_array += result
     end
 
@@ -20,6 +24,12 @@ class RangesMerger
 
   # Check if there are overlaps in Array
   def self.check_overlaps(_array)
+    sorted = _array.sort { |a, b| a[0] <=> b[0] }.uniq
+
+    (1...sorted.size).each do |i|
+      return true if sorted[i][0] <= sorted[i-1][0]
+      return true if sorted[i][0] <= sorted[i-1][1]
+    end
     return false
   end
 
