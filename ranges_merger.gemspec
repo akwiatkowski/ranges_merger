@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = "ranges_merger"
-  s.version = "0.0.0"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aleksander Kwiatkowski"]
   s.date = "2011-12-04"
-  s.description = "Simple gem used for merging range-like objects"
+  s.description = "Simple gem used for merging range-like objects. If you have problems with operations on ranges this gem can save you some time."
   s.email = "bobikx@poczta.fm"
   s.extra_rdoc_files = [
     "LICENSE.txt",
