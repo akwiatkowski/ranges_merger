@@ -18,7 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/akwiatkowski/ranges_merger"
   gem.license = "LPGLv3"
   gem.summary = %Q{Small gem for merging range-like objects}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.description = %Q{Simple gem used for merging range-like objects}
   gem.email = "bobikx@poczta.fm"
   gem.authors = ["Aleksander Kwiatkowski"]
   # dependencies defined in Gemfile
