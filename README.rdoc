@@ -17,6 +17,7 @@ If you want to merge 2 ranges please use code just like below.
  # => result = [[1, 4]]
 
 
+
 If you want to merge more than 2 ranges please use code just like below.
 
  a = [1, 3]
@@ -28,6 +29,24 @@ If you want to merge more than 2 ranges please use code just like below.
  result = RangesMerger.merge([a, b, c])
 
  # => result = [[1, 6]]
+
+
+
+If you want to merge Range objects.
+
+ ranges = [
+
+      (1..2),
+
+      (2..3),
+
+      (5..8)
+
+ ]
+
+ result = RangesMerger.merge(ranges)
+
+ # => result = [(1..3),(5..8)]
 
 
 
