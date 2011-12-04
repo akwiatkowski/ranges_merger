@@ -9,10 +9,17 @@ class RangesMerger
     result_array = Array.new
 
     last_result = sorted[0]
-    (1...sorted.size).each do |i|
+    i = 1
+    while i < sorted.size do
       result = self.two_way_merge([last_result, sorted[i]])
       last_result = result[0]
-      result_array += result
+      result_array << result[0]
+
+      if result.size == 2
+        sorted << result[1]
+      end
+
+      i += 1
     end
 
     if self.check_overlaps(result_array)
