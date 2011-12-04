@@ -1,6 +1,6 @@
 class RangesMerger
   # Merge loop
-  def self.merge(_array)
+  def self.merge_old(_array)
     return _array if _array.size <= 1
     sorted = _array.sort { |a, b| a[0] <=> b[0] }.uniq
 
@@ -11,7 +11,12 @@ class RangesMerger
     last_result = sorted[0]
     i = 1
     while i < sorted.size do
-      result = self.two_way_merge([last_result, sorted[i]])
+      to_merge = [last_result, sorted[i]]
+      puts "merging #{to_merge.inspect}"
+
+      result = self.two_way_merge(to_merge)
+      puts "merged #{result.inspect}"
+
       last_result = result[0]
       result_array << result[0]
 
@@ -22,11 +27,41 @@ class RangesMerger
       i += 1
     end
 
-    if self.check_overlaps(result_array)
-      return self.merge(result_array)
+    return result_array
+  end
+
+  def self.merge(_array)
+    before = _array
+    while true do
+      after = self.merge_array(_array)
+      return after if before == after or not check_overlaps(after)
+      before = after
+    end
+  end
+
+  def self.merge_array(_array)
+    return _array if _array.size <= 1
+    sorted = _array.sort { |a, b| a[0] <=> b[0] }.uniq
+
+    i = 1
+    while i < sorted.size do
+      to_merge = [sorted[i-1], sorted[i]]
+      puts "merging #{to_merge.inspect}"
+
+      result = self.two_way_merge(to_merge)
+      puts "merged #{result.inspect}"
+
+      sorted[i-1] = result[0]
+
+      if result.size == 1
+        sorted[i] = nil
+        sorted.delete_if { |s| s.nil? }
+      else
+        i += 1
+      end
     end
 
-    return result_array
+    return sorted
   end
 
   # Check if there are overlaps in Array
