@@ -1,36 +1,22 @@
 class RangesMerger
-  # Merge loop
-  def self.merge_old(_array)
-    return _array if _array.size <= 1
-    sorted = _array.sort { |a, b| a[0] <=> b[0] }.uniq
 
-    puts sorted.inspect
+  # Merge for various objects (Array, Range)
+  def self.merge(_array)
+    klass = _array.first.class
 
-    result_array = Array.new
-
-    last_result = sorted[0]
-    i = 1
-    while i < sorted.size do
-      to_merge = [last_result, sorted[i]]
-      puts "merging #{to_merge.inspect}"
-
-      result = self.two_way_merge(to_merge)
-      puts "merged #{result.inspect}"
-
-      last_result = result[0]
-      result_array << result[0]
-
-      if result.size == 2
-        sorted << result[1]
-      end
-
-      i += 1
+    if klass.to_s == "Array"
+      return self.merge_loop(_array)
+    elsif klass.to_s == "Range"
+      result = self.merge_loop( _array.collect{|a| [a.first, a.last]} )
+      return result.collect{|r| Range.new(r[0], r[1])}
+    else
+      return []
     end
 
-    return result_array
   end
 
-  def self.merge(_array)
+  # Merge loop
+  def self.merge_loop(_array)
     before = _array
     while true do
       after = self.merge_array(_array)

@@ -135,5 +135,15 @@ describe "RangesMerger" do
     result.last[1].should == 1000*10 + 1
   end
 
+  it "should merge Range objects" do
+    ranges = [
+      (1..2),
+      (2..3),
+      (5..8)
+    ]
+    result = RangesMerger.merge(ranges)
+    result.should == [(1..3),(5..8)]
+  end
+
 
 end
