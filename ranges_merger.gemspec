@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "lib/ranges_merger.rb",
+    "ranges_merger.gemspec",
     "spec/ranges_merger_spec.rb",
     "spec/spec_helper.rb"
   ]
