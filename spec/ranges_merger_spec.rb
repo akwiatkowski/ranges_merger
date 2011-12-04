@@ -52,5 +52,17 @@ describe "RangesMerger" do
     result.should == [[1, 5]]
   end
 
+  it "should merge 3 ranges (simple)" do
+    ranges = [[1,2],[2,3],[3,4]]
+    result = RangesMerger.merge(ranges)
+    result.should == [[1, 4]]
+  end
+
+  it "should merge 3 ranges" do
+    ranges = [[0,3], [3,4],[1,2], [10,14], [12,13]]
+    result = RangesMerger.merge(ranges)
+    result.should == [[0, 4],[10,14]]
+  end
+
 
 end

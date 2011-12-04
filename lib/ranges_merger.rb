@@ -1,4 +1,28 @@
 class RangesMerger
+  # Merge loop
+  def self.merge(_array)
+    return _array if _array.size <= 1
+    sorted = _array.sort { |a, b| a[0] <=> b[0] }
+
+    result_array = Array.new
+
+    (1...sorted.size).each do |i|
+      result = self.two_way_merge([sorted[i-1], sorted[i]])
+      result_array += result
+    end
+
+    if self.check_overlaps(result_array)
+      return self.merge(result_array)
+    end
+
+    return result_array
+  end
+
+  # Check if there are overlaps in Array
+  def self.check_overlaps(_array)
+    return false
+  end
+
   def self.two_way_merge(_array)
     a_from = _array[0][0]
     b_from = _array[1][0]
