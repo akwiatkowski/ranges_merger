@@ -2,21 +2,35 @@ module RangesMergerExclusion
 
   def exclude(_array_a, _array_b)
     new_array = Array.new
+
+    # array of bases
+    bases = merge(_array_a)
+
     # loop for "base"
-    _array_a.each do |a|
-      excluded = [a]
-      puts "excluded #{excluded.inspect}"
+    i = 0
+    while i < bases.size
+      base = bases[i]
 
       # loop for "exclusions"
       _array_b.each do |b|
         # base can be excluded to this level that is empty
-        excluded = two_way_exclusion([excluded.first, b]) if excluded.size > 0
-        puts "excluding to #{excluded.inspect}"
+        if not base.nil?
+          result = two_way_exclusion([base, b])
+          if result.size == 1
+            base = two_way_exclusion([base, b])[0]
+          elsif result.size == 2
+            # first go to processing, last go to base pool
+            base = result[0]
+            bases << result[1]
+          elsif result.size == 0
+            base = nil
+          end
+        end
+
       end
 
-      puts "excluded after #{excluded.inspect}"
-
-      new_array += excluded
+      new_array << base if not base.nil?
+      i += 1
     end
 
     return new_array
@@ -51,7 +65,7 @@ module RangesMergerExclusion
     end
 
     # 3 EXCL inside BASE
-    if excl_from > base_from  and excl_to < base_to
+    if excl_from > base_from and excl_to < base_to
       puts "3"
       return [[base_from, excl_from], [excl_to, base_to]]
     end
