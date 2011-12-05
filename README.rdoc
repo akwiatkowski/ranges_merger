@@ -4,21 +4,7 @@ Very simple gem for merging range-like objects.
 
 == How to use
 
-Please use range-like object converted to format [[from, to], [from, to], ...].
-
-If you want to merge 2 ranges please use code just like below.
-
- a = [1, 3]
-
- b = [2, 4]
-
- result = RangesMerger.two_way_merge([a, b])
-
- # => result = [[1, 4]]
-
-
-
-If you want to merge more than 2 ranges please use code just like below.
+If you want to merge please use code just like below.
 
  a = [1, 3]
 
