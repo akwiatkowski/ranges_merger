@@ -33,7 +33,7 @@ module RangesMergerExclusion
       i += 1
     end
 
-    return new_array
+    return merge(new_array)
   end
 
   # Merge two Arrays
@@ -44,41 +44,41 @@ module RangesMergerExclusion
     excl_from = _array[1][0]
     excl_to = _array[1][1]
 
-    puts "base_from #{base_from} base_to #{base_to} excl_from #{excl_from} excl_to #{excl_to}"
+    # puts "base_from #{base_from} base_to #{base_to} excl_from #{excl_from} excl_to #{excl_to}"
 
     # 1A. BASE < EXCL
     if (base_to < excl_to and base_from < excl_from and base_to < excl_from)
-      puts "1a"
+      # puts "1a"
       return [[base_from, base_to]]
     end
 
     # 1B. BASE > EXCL
     if  (base_to > excl_to and base_from > excl_from and excl_to < base_from)
-      puts "1b"
+      # puts "1b"
       return [[base_from, base_to]]
     end
 
     # 2 EXCL contains BASE => nothing
     if base_from >= excl_from and base_to <= excl_to
-      puts "2"
+      # puts "2"
       return []
     end
 
     # 3 EXCL inside BASE
     if excl_from > base_from and excl_to < base_to
-      puts "3"
+      # puts "3"
       return [[base_from, excl_from], [excl_to, base_to]]
     end
 
     # 4A EXCL has inside BASE from
     if excl_from <= base_from and excl_to >= base_from
-      puts "4a"
+      # puts "4a"
       return [[excl_to, base_to]]
     end
 
     # 4b EXCL has inside BASE to
     if excl_from <= base_to and excl_to >= base_from
-      puts "4b"
+      # puts "4b"
       return [[base_from, excl_from]]
     end
 
