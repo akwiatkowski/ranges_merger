@@ -2,7 +2,7 @@
 
 Very simple gem for merging range-like objects.
 
-== How to use
+== How to use, simple merge
 
 If you want to merge please use code just like below.
 
@@ -14,9 +14,9 @@ If you want to merge please use code just like below.
 
  result = RangesMerger.merge([a, b, c])
 
- # => result = [[1, 6]]
+ # result => [[1, 6]]
 
-
+== Range objects
 
 If you want to merge Range objects.
 
@@ -32,8 +32,9 @@ If you want to merge Range objects.
 
  result = RangesMerger.merge(ranges)
 
- # => result = [(1..3),(5..8)]
+ # result => [(1..3),(5..8)]
 
+== Exclusion
 
 If you want to exclude please use code just like below.
 
@@ -55,7 +56,25 @@ And run some processing
 
  result = RangesMerger.exclude([a, b, c], [x, y])
 
- # => result = [[1, 2], [10, 11]]
+ # result => [[1, 2], [10, 11]]
+
+== I want an instance
+
+If you want to have instance, add and remove ranges as you wish just do something like that:
+
+ r = RangesMerger.new
+
+ r += [[1, 10]]
+
+ r += [[8, 15]]
+
+ # r.to_array => [[1, 15]]
+
+ r -= [[2, 4]]
+
+ r -= [[11, 12]]
+
+ # r.to_array => [[1, 2], [4,11], [12,15]]
 
 
 == Contributing to ranges_merger

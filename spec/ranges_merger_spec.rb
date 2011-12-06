@@ -145,7 +145,7 @@ describe "RangesMerger" do
       (5..8)
     ]
     result = RangesMerger.merge(ranges)
-    result.should == [(1..3),(5..8)]
+    result.should == [(1..3), (5..8)]
   end
 
 
@@ -221,6 +221,48 @@ describe "RangesMerger" do
     result.should == [[1, 2], [10, 11]]
   end
 
+  # Instance
+
+  it "should create instance, add 2 ranges and process them to array format (using add method)" do
+    r = RangesMerger.new
+    r.add [[1, 2]]
+    r.add [[2, 3]]
+    r.kind_of?(RangesMerger).should
+    r.to_array.should == [[1, 3]]
+  end
+
+  it "should create instance, add 2 ranges and process them to array format (using plus operator)" do
+    r = RangesMerger.new
+    r += [[1, 2]]
+    r += [[2, 3]]
+    r.kind_of?(RangesMerger).should
+    r.to_array.should == [[1, 3]]
+  end
+
+
+  it "should create instance, add 2 ranges, remove 2 and process them to array format (using add/remove method)" do
+    r = RangesMerger.new
+    r.add [[1, 10]]
+    r.add [[8, 15]]
+    r.to_array.should == [[1, 15]]
+    
+    r.remove [[2, 4]]
+    r.remove [[11, 12]]
+    r.kind_of?(RangesMerger).should
+    r.to_array.should == [[1, 2], [4,11], [12,15]]
+  end
+
+  it "should create instance, add 2 ranges, remove 2 and process them to array format (using plus/minus operator)" do
+    r = RangesMerger.new
+    r += [[1, 10]]
+    r += [[8, 15]]
+    r.to_array.should == [[1, 15]]
+
+    r -= [[2, 4]]
+    r -= [[11, 12]]
+    r.kind_of?(RangesMerger).should
+    r.to_array.should == [[1, 2], [4,11], [12,15]]
+  end
 
 
 end

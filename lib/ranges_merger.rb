@@ -9,9 +9,36 @@ class RangesMerger
 
   attr_reader :ranges
 
-  def initialize(_array)
-    @ranges = RangesMerger::Merging.merge(
+  def initialize(_array = [])
+    @ranges = self.class.merge(
       self.class.normalize_array(_array)
     )
   end
+
+  def add(_array)
+    @ranges = self.class.merge(@ranges + _array)
+    return self
+  end
+
+  def +(_array)
+    add(_array)
+  end
+
+  def remove(_array)
+    @ranges = self.class.exclude(@ranges, _array)
+    return self
+  end
+
+  def -(_array)
+    remove(_array)
+  end
+
+  def to_ranges
+    self.class.array_to_ranges(@ranges)
+  end
+
+  def to_array
+    @ranges
+  end
+
 end
