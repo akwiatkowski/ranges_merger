@@ -245,11 +245,11 @@ describe "RangesMerger" do
     r.add [[1, 10]]
     r.add [[8, 15]]
     r.to_array.should == [[1, 15]]
-    
+
     r.remove [[2, 4]]
     r.remove [[11, 12]]
     r.kind_of?(RangesMerger).should
-    r.to_array.should == [[1, 2], [4,11], [12,15]]
+    r.to_array.should == [[1, 2], [4, 11], [12, 15]]
   end
 
   it "should create instance, add 2 ranges, remove 2 and process them to array format (using plus/minus operator)" do
@@ -261,8 +261,21 @@ describe "RangesMerger" do
     r -= [[2, 4]]
     r -= [[11, 12]]
     r.kind_of?(RangesMerger).should
-    r.to_array.should == [[1, 2], [4,11], [12,15]]
+    r.to_array.should == [[1, 2], [4, 11], [12, 15]]
   end
 
+  it "should create instance, mixed test" do
+    r = RangesMerger.new
+    r += [[10, 50]]
+    r.to_array.should == [[10, 50]]
+    r -= [[15, 30]]
+    r.to_array.should == [[10, 15], [30, 50]]
+    r += [[0, 20]]
+    r.to_array.should == [[0, 20], [30, 50]]
+    r -= [[2, 5]]
+    r.to_array.should == [[0, 2], [5, 20], [30, 50]]
+    r += [[-2, 3]]
+    r.to_array.should == [[-2, 3], [5, 20], [30, 50]]
+  end
 
 end
