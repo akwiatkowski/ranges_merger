@@ -1,11 +1,13 @@
 require 'ranges_merger/ranges_merger_merging'
 require 'ranges_merger/ranges_merger_utils'
 require 'ranges_merger/ranges_merger_exclusion'
+require 'ranges_merger/ranges_merger_divider'
 
 class RangesMerger
   extend RangesMergerMerging
   extend RangesMergerUtils
   extend RangesMergerExclusion
+  extend RangesMergerDivider
 
   attr_reader :ranges
 
@@ -31,6 +33,18 @@ class RangesMerger
 
   def -(_array)
     remove(_array)
+  end
+
+  def divide(interval, allow_partials = true)
+    return self.class.divide(@ranges, interval, allow_partials)
+  end
+
+  def /(interval)
+    divide(interval, true)
+  end
+
+  def %(interval)
+    divide(interval, false)
   end
 
   def to_ranges

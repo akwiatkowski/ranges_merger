@@ -278,4 +278,73 @@ describe "RangesMerger" do
     r.to_array.should == [[-2, 3], [5, 20], [30, 50]]
   end
 
+  # Dividing
+
+  it "should divide simple range" do
+    r = RangesMerger.new
+    r += [[10, 50]]
+    #result = r.divide(5)
+    result = r / 5
+    result.should == [[10, 15], [15, 20], [20, 25], [25, 30], [30, 35], [35, 40], [40, 45], [45, 50]]
+
+    result = r % 5
+    result.should == [[10, 15], [15, 20], [20, 25], [25, 30], [30, 35], [35, 40], [40, 45], [45, 50]]
+  end
+
+  it "should divide simple range with partials and without" do
+    r = RangesMerger.new
+    r += [[1, 9]]
+    result = r % 3
+    result.should == [[1, 4], [4, 7]]
+    result = r / 3
+    result.should == [[1, 4], [4, 7], [7, 9]]
+  end
+
+  it "should divide simple range with partials and without" do
+    r = RangesMerger.new
+    r += [[1, 2], [3, 5], [6, 9]]
+    result = r % 2
+    result.should == [[3, 5], [6, 8]]
+    result = r / 2
+    result.should == [[1, 2], [3, 5], [6, 8], [8, 9]]
+  end
+
+  it "should merge Time ranges" do
+    t_now = Time.now
+
+    r = RangesMerger.new
+    r += [[t_now - 2*3600, t_now - 0*3600]]
+    r += [[t_now - 3*3600, t_now - 1.3600]]
+
+    result = r.to_array
+    (result[0][1] - result[0][0]).should == 3*3600
+
+    r -= [[t_now - 2*3600, t_now - 1*3600]]
+
+    result = r.to_array
+    result.should == [
+      [t_now - 3*3600, t_now - 2*3600],
+      [t_now - 1*3600, t_now - 0*3600]
+    ]
+
+    result = r / (10*60)
+    result.size.should == 12
+    (result.first[1] - result.first[0]).should == 10*60
+  end
+
+  it "should divide simple Time ranges" do
+    t_now = Time.now
+    r = RangesMerger.new
+    r += [[t_now - 1*3600, t_now - 1*3600 + 45*60]]
+
+    result = r / (10*60)
+    result.size.should == 5
+    (result.last[1] - result.last[0]).should == 5*60
+
+    result = r % (10*60)
+    result.size.should == 4
+    (result.last[1] - result.last[0]).should == 10*60
+  end
+
+
 end
