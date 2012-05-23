@@ -1,6 +1,6 @@
 class RangesMerger
 
-  def self.energy_calculation(voltages, currents)
+  def self.energy_calculation(voltages, currents, _debug = false)
     return 0 if voltages.size == 0 or currents.size == 0
 
     # sort time ranges
@@ -38,7 +38,7 @@ class RangesMerger
       end
       energy += _energy_part
 
-      puts "#{voltage_i}, #{current_i} = #{_energy_part}, #{v.inspect}, #{c.inspect}"
+      puts "#{voltage_i}, #{current_i} = #{_energy_part}, #{v.inspect}, #{c.inspect}" if _debug
 
       # next from array
       if c[1] > v[1]
