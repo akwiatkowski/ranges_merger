@@ -2,6 +2,7 @@ require 'ranges_merger/ranges_merger_merging'
 require 'ranges_merger/ranges_merger_utils'
 require 'ranges_merger/ranges_merger_exclusion'
 require 'ranges_merger/ranges_merger_divider'
+require 'ranges_merger/ranges_merger_energy_calculation'
 
 class RangesMerger
   extend RangesMergerMerging
