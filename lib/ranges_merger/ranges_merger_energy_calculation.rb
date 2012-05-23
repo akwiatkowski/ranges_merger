@@ -12,6 +12,9 @@ class RangesMerger
     voltage_i = 0
     current_i = 0
 
+    # output
+    energy = 0.0
+
     voltage_first = true
     voltage_first = false if currents[0][0] < voltages[0][0]
 
@@ -19,8 +22,25 @@ class RangesMerger
       v = voltages[voltage_i]
       c = currents[current_i]
 
-      puts v.inspect, c.inspect
-      return 0
+      # common time range
+      _time_from = v[0]
+      _time_from = c[0] if c[0] > v[0]
+
+      _time_to = v[1]
+      _time_to = c[1] if c[1] < v[1]
+
+      # adding to output
+      _energy_part = v[2] * c[2] * (_time_to - _time_from)
+      energy += _energy_part
+
+      puts "#{voltage_i}, #{current_i} = #{_energy_part}, #{v.inspect}, #{c.inspect}"
+
+      # next from array
+      if c[1] > v[1]
+        voltage_i += 1
+      else
+        current_i += 1
+      end
 
     end
 
@@ -37,7 +57,7 @@ class RangesMerger
 
     start_time = voltages
 
-    return 0
+    return energy
   end
 
 end
