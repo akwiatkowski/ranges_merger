@@ -125,8 +125,8 @@ object.
 == Calculation of energy (beta)
 
 Imagine you have information about voltage and current and you want to calculate work/energy.
-Theese measurements are not set to one point in time but to a time range ('from' and 'to').
-Theese time ranges are not identical for voltage and current. So what would you do? You
+These measurements are not set to one point in time but to a time range ('from' and 'to').
+These time ranges are not identical for voltage and current. So what would you do? You
 can use this gem! :)
 
  # currents = [
@@ -150,8 +150,8 @@ can use this gem! :)
  # result => 4
 
 
-This is early version, it should work and calculate correct amount of energy, but
-it could not :]
+This is an early version, it should work and calculate correct amount of energy, but
+it could not :].
 
 
 
