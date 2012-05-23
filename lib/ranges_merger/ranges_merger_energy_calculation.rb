@@ -30,7 +30,12 @@ class RangesMerger
       _time_to = c[1] if c[1] < v[1]
 
       # adding to output
-      _energy_part = v[2] * c[2] * (_time_to - _time_from)
+      if _time_to > _time_from
+        _energy_part = v[2] * c[2] * (_time_to - _time_from)
+      else
+        # it should not enter here... probably
+        _energy_part = 0.0
+      end
       energy += _energy_part
 
       puts "#{voltage_i}, #{current_i} = #{_energy_part}, #{v.inspect}, #{c.inspect}"
