@@ -26,6 +26,12 @@ describe RangesMergerDividerEqInterval do
     result.should == [[2, 4], [6, 8]]
   end
 
+  it "should not nuke world when range is empty" do
+    r = RangesMerger.new
+    result = r.divide_eqi(2)
+    result.should == []
+  end
+
   it 'readme' do
     r = RangesMerger.new
     r += [[1, 9]]

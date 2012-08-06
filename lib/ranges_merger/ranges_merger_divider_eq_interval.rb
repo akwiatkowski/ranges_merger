@@ -4,6 +4,9 @@ module RangesMergerDividerEqInterval
     # calculate for whole range
     joined_array = merge(_array)
 
+    # anti-nuke
+    return [] if joined_array.size == 0 or joined_array.nil?
+
     min = joined_array.first[0]
     min = total_min if total_min < min and not total_min.nil? # before merging
     max = joined_array.last[1]
