@@ -93,6 +93,26 @@ parts than interval, or without them.
  # result => [[1, 4], [4, 7], [7, 9]]
 
 
+== Dividing with equal interval
+
+ r = RangesMerger.new
+
+ r += [[1, 9]] # store 1 as lowest value
+
+ r -= [[1, 2], [4, 5]]
+
+ result = r % 2
+
+ # result => [[2, 4], [5, 7], [7, 9]]
+
+ result = r / 2
+
+ # result => [[2, 4], [5, 7], [7, 9]]
+
+ result = r.divide_eqi(2)
+
+ # result => [[5, 7], [7, 9]]
+
 
 == Ranges are not only numbers
 
