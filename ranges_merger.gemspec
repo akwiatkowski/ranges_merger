@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "ranges_merger"
-  s.version = "0.4.1"
+  s.version = "0.4.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aleksander Kwiatkowski"]
@@ -35,8 +35,8 @@ Gem::Specification.new do |s|
     "lib/ranges_merger/ranges_merger_utils.rb",
     "ranges_merger.gemspec",
     "spec/ranges_merger_energy_calculation_spec.rb",
+    "spec/ranges_merger_equal_interval_spec.rb",
     "spec/ranges_merger_spec.rb",
-    "spec/ranges_merger_spec_equal_interval.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = "http://github.com/akwiatkowski/ranges_merger"
